@@ -14,6 +14,7 @@
         (mu4e :skip-install t)
         mu4e-maildirs-extension
         org
+        persp-mode
         ))
 
 (defun mu4e/init-mu4e ()
@@ -22,10 +23,7 @@
     :init
     (progn
       (spacemacs/set-leader-keys "a M" 'mu4e)
-      (global-set-key (kbd "C-x m") 'mu4e-compose-new)
-      (spacemacs|define-custom-layout "@Mail"
-        :binding "M"
-        :body (mu4e)))
+      (global-set-key (kbd "C-x m") 'mu4e-compose-new))
     :config
     (progn
       (evilified-state-evilify-map mu4e-main-mode-map
@@ -76,3 +74,8 @@
 (defun mu4e/post-init-org ()
   ;; load org-mu4e when org is actually loaded
   (with-eval-after-load 'org (require 'org-mu4e nil 'noerror)))
+
+(defun mu4e/post-init-persp-mode ()
+  (spacemacs|define-custom-layout "@Mail"
+    :binding "M"
+    :body (mu4e)))
