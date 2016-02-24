@@ -34,7 +34,6 @@ existing =dotspacemacs-configuration-layers= list in this file.
 
 * Commands
 
-=======
 ** Global bindings
 
 | Keybinding | Command             |
