@@ -66,8 +66,3 @@ then fallback to the maildir."
     (or (mu4e-message-contact-field-matches msg :to rx)
         (mu4e-message-contact-field-matches msg :cc rx)
         (mu4e-message-contact-field-matches msg :bcc rx))))
-
-(defun mu4e/set-send-function (function)
-  "Set FUNCTION for sending mails."
-  (setq send-mail-function         function
-        message-send-mail-function function))

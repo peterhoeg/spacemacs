@@ -15,8 +15,8 @@
 (defvar mu4e-account-alist nil
   "Account alist for custom multi-account compose.")
 
-(defvar mu4e-async nil
-  "Prefer async operations.")
+(defvar mu4e-enable-async-operations nil
+  "Prefer async operations when sending emails.")
 
 (defvar mu4e-enable-notifications nil
   "If non-nil, enable desktop notifications for unread emails.")

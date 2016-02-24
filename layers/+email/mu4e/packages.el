@@ -23,7 +23,11 @@
     :init
     (progn
       (spacemacs/set-leader-keys "a M" 'mu4e)
-      (global-set-key (kbd "C-x m") 'mu4e-compose-new))
+      (global-set-key (kbd "C-x m") 'mu4e-compose-new)
+      (let ((dir "~/Downloads"))
+        (when (file-directory-p dir)
+          (setq mu4e-attachment-dir dir))))
+
     :config
     (progn
       (evilified-state-evilify-map mu4e-main-mode-map
@@ -56,16 +60,13 @@
                 'ivy-completing-read
               'helm--completing-read-default))
 
-      (when mu4e-async
+      (when mu4e-enable-async-operations
         (require 'smtpmail-async)
-        (mu4e/set-send-function 'async-smtpmail-send-it))
+        (setq send-mail-function         'async-smtpmail-send-it
+              message-send-mail-function 'async-smtpmail-send-it))
 
       (when (fboundp 'imagemagick-register-types)
         (imagemagick-register-types))
-
-      (let ((dir "~/Downloads"))
-        (when (file-directory-p dir)
-          (setq mu4e-attachment-dir dir)))
 
       (setq mu4e-use-fancy-chars 't
             mu4e-view-show-images 't
