@@ -1,0 +1,33 @@
+#+TITLE: csv layer
+#+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="../css/readtheorg.css" />
+
+* Table of Contents                                        :TOC_4_org:noexport:
+:PROPERTIES:
+ - [[Description][Description]]
+ - [[Install][Install]]
+ - [[Key bindings][Key bindings]]
+
+* Description
+:PROPERTIES:
+:ID:       dcf6853c-6b25-4453-bd86-e29dfc9e48e3
+:END:
+This layer adds support for CSV files.
+
+* Install
+:PROPERTIES:
+:ID:       c811b205-c006-4c0b-b2d2-55f02b1be8dd
+:END:
+To use this contribution add it to your =~/.spacemacs=
+
+#+begin_src emacs-lisp
+  (setq-default dotspacemacs-configuration-layers '(csv))
+#+end_src
+
+* Key bindings
+:PROPERTIES:
+:ID:       cf9e4dc5-ac62-456d-b569-97fddac85a2a
+:END:
+
+| Key Binding     | Description    |
+|-----------------+----------------|
+| ~<SPC> x x x~   | Does thing01   |
