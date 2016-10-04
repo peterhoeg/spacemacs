@@ -102,6 +102,14 @@
       (when (fboundp 'imagemagick-register-types)
         (imagemagick-register-types))
 
+      (let ((dir "~/Downloads"))
+        (when (file-directory-p dir)
+          (setq mu4e-attachment-dir dir)))
+
+      (setq mu4e-use-fancy-chars 't
+            mu4e-view-show-images 't
+            message-kill-buffer-on-exit 't)
+
       (add-to-list 'mu4e-view-actions
                    '("View in browser" . mu4e-action-view-in-browser) t)
 
@@ -123,7 +131,11 @@
                 (push (buffer-name buffer) buffers))))
           (nreverse buffers)))
       (setq gnus-dired-mail-mode 'mu4e-user-agent)
-      (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode))))
+      (add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
+
+      (when mu4e-account-alist
+        (add-hook 'mu4e-compose-pre-hook 'mu4e/set-account)
+        (add-hook 'message-sent-hook 'mu4e/mail-account-reset)))))
 
 (defun mu4e/init-mu4e-alert ()
   (use-package mu4e-alert
