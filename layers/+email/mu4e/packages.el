@@ -53,8 +53,29 @@
 
       (setq mu4e-completing-read-function 'completing-read)
 
+      (if mu4e-async
+        (progn
+          (require 'smtpmail-async)
+          (mu4e/set-send-function 'async-smtpmail-send-it))
+        (mu4e/set-send-function 'smtpmail-send-it))
+
+      (when (fboundp 'imagemagick-register-types)
+        (imagemagick-register-types))
+
+      (let ((dir "~/Downloads"))
+        (when (file-directory-p dir)
+          (setq mu4e-attachment-dir dir)))
+
+      (setq mu4e-use-fancy-chars 't
+            mu4e-view-show-images 't
+            message-kill-buffer-on-exit 't)
+
       (add-to-list 'mu4e-view-actions
                    '("View in browser" . mu4e-action-view-in-browser) t)
+
+      (add-hook 'mu4e-compose-mode-hook
+                (lambda ()
+                  (use-hard-newlines t 'guess)))
 
       (when mu4e-account-alist
         (add-hook 'mu4e-compose-pre-hook 'mu4e/set-account)
@@ -77,5 +98,3 @@
 (defun mu4e/post-init-org ()
   ;; load org-mu4e when org is actually loaded
   (with-eval-after-load 'org (require 'org-mu4e nil 'noerror)))
-
-

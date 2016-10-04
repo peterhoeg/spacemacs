@@ -21,5 +21,8 @@
 (defvar mu4e-enable-mode-line nil
   "If non-nil, enable display of unread emails in mode-line.")
 
+(defvar mu4e-async nil
+  "Prefer async operations.")
+
 (when mu4e-installation-path
   (push mu4e-installation-path load-path))
