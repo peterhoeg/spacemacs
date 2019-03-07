@@ -241,6 +241,7 @@
 
 (defun ruby/init-rubocop ()
   (use-package rubocop
+    :diminish ""
     :defer t
     :init (spacemacs/add-to-hooks 'rubocop-mode '(ruby-mode-hook
                                                   enh-ruby-mode-hook))
@@ -295,6 +296,7 @@
 (defun ruby/init-ruby-refactor ()
   (use-package ruby-refactor
     :defer t
+    :diminish ""
     :init (dolist (hook '(ruby-mode-hook enh-ruby-mode-hook))
             (add-hook hook 'ruby-refactor-mode-launch))
     :config
