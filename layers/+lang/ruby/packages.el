@@ -356,7 +356,6 @@
   (use-package seeing-is-believing
     :defer t
     :commands (seeing-is-believing seeing-is-believing-run seeing-is-believing-clear)
-    :if (executable-find "seeing_is_believing")
     :init
     (progn
       (spacemacs|diminish seeing-is-believing " 👁" " @")
