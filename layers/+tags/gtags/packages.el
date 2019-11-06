@@ -99,7 +99,7 @@
         (define-key ggtags-mode-map (kbd "C-x 4 .") 'helm-gtags-find-tag-other-window)
         (define-key ggtags-mode-map (kbd "M-,") 'helm-gtags-pop-stack)
         (define-key ggtags-mode-map (kbd "M-*") 'helm-gtags-pop-stack))
-      (spacemacs|diminish ggtags-mode " 🅶" " [g]"))))
+      (spacemacs|diminish ggtags-mode "g" " [g]"))))
 
 (defun gtags/init-helm-gtags ()
   (use-package helm-gtags
