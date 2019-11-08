@@ -145,9 +145,9 @@ that:\n
 (defvar dos-mode-map
   (let ((map (make-sparse-keymap)))
     (easy-menu-define nil map nil dos-menu)
-    (define-key map [f11]         'dos-outline      )
-    (define-key map [S-f12]       'dos-template-mini)
-    (define-key map [f12]         'dos-template     )
+    ;; (define-key map [f11]         'dos-outline      )
+    ;; (define-key map [S-f12]       'dos-template-mini)
+    ;; (define-key map [f12]         'dos-template     )
     (define-key map [?\C-c ?\C-.] 'dos-mode-version )
     (define-key map [?\C-c ?\C-/] 'dos-help-cmd     )
     (define-key map [?\C-c ?\C- ] 'dos-sep          )
