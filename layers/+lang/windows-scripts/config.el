@@ -11,4 +11,9 @@
 
 ;; variables
 
-(spacemacs|define-jump-handlers dos-mode)
+(defvar dos-prefer-bat-mode nil
+  "Prefer the built-in bat-mode instead of dos-mode")
+
+(if dos-prefer-bat-mode
+    (spacemacs|define-jump-handlers bat-mode)
+  (spacemacs|define-jump-handlers dos-mode))

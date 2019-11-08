@@ -10,33 +10,35 @@
 ;;; License: GPLv3
 
 (setq windows-scripts-packages
-  '(
-    (dos :location local)
-    ggtags
-    counsel-gtags
-    helm-gtags
-    powershell
-    ))
+      '(
+        (bat :location built-in)
+        (dos :location local)
+        ggtags
+        counsel-gtags
+        helm-gtags
+        powershell
+        ))
+
+(defun windows-scripts/init-bat ()
+  (use-package bat
+    :if dos-prefer-bat-mode
+    :defer t
+    :config
+    (spacemacs/set-leader-keys-for-major-mode 'bat-mode
+      "hD" 'bat-cmd-help
+      "eb" 'bat-run
+      "eB" 'bat-run-args
+      "t"  'bat-template
+      "T"  'bat-template)))
 
 (defun windows-scripts/init-dos ()
   (use-package dos
+    :unless dos-prefer-bat-mode
     :commands dos-mode
     :mode (("\\.bat\\'" . dos-mode)
            ("\\.cmd\\'" . dos-mode))
     :init
-    (progn
-      (defun windows-scripts/dos-outline-hook ()
-        (defun outline-mouse-select ()
-          "Select position and return to `dos-mode'."
-          (interactive)
-          (dos-mode)
-          (beginning-of-line)))
-      (defun windows-scripts/dos-outline ()
-        "Set a local binding to be able to return easily in dos-mode."
-        (interactive)
-        (dos-outline)
-        (define-key evil-normal-state-local-map (kbd "SPC m z") 'dos-mode))
-      (add-hook 'outline-mode-hook 'windows-scripts/dos-outline-hook))
+    (add-hook 'outline-mode-hook 'windows-scripts/dos-outline-hook)
     :config
     (spacemacs/set-leader-keys-for-major-mode 'dos-mode
       "hD" 'dos-help-cmd
@@ -48,13 +50,19 @@
       "z"  'windows-scripts/dos-outline)))
 
 (defun windows-scripts/post-init-ggtags ()
-  (add-hook 'dos-mode-local-vars-hook #'spacemacs/ggtags-mode-enable))
+  (if dos-prefer-bat-mode
+      (add-hook 'bat-mode-hook #'spacemacs/ggtags-mode-enable)
+    (add-hook 'dos-mode-local-vars-hook #'spacemacs/ggtags-mode-enable)))
 
 (defun windows-scripts/post-init-counsel-gtags ()
-  (spacemacs/counsel-gtags-define-keys-for-mode 'dos-mode))
+  (if dos-prefer-bat-mode
+      (spacemacs/counsel-gtags-define-keys-for-mode 'bat-mode)
+    (spacemacs/counsel-gtags-define-keys-for-mode 'dos-mode)))
 
 (defun windows-scripts/post-init-helm-gtags ()
-  (spacemacs/helm-gtags-define-keys-for-mode 'dos-mode))
+  (if dos-prefer-bat-mode
+      (spacemacs/helm-gtags-define-keys-for-mode 'bat-mode)
+    (spacemacs/helm-gtags-define-keys-for-mode 'dos-mode)))
 
 (defun windows-scripts/init-powershell ()
   (use-package powershell
@@ -72,8 +80,8 @@
       (spacemacs/set-leader-keys-for-major-mode 'powershell-mode
         "rr" 'powershell-regexp-to-regex)
 
-    ;; TODO
-    ;; - split out powershell
-    ;; - get help output with mgg (Get-Help) or Get-Help -online
-    ;; -
-    )))
+      ;; TODO
+      ;; - split out powershell
+      ;; - get help output with mgg (Get-Help) or Get-Help -online
+      ;; -
+      )))
