@@ -95,3 +95,4 @@ cscope.in.out
 cscope.po.out
 
 .yas-compiled-snippets.el
+package-quickstart.el
